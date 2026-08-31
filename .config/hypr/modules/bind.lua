@@ -8,6 +8,7 @@ local notifcenter = "qs ipc call notifcenter toggle"
 local wallpaper_switcher = "qs ipc call wallpaper toggle"
 local clipboard = "qs ipc call clipboard toggle"
 local power_option = "qs ipc call power toggle"
+local system_monitor = "qs ipc call systemmonitor toggle"
 
 -- Keybinds
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
@@ -33,7 +34,7 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screens
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard))
 hl.bind(mainMod .. " + SHIFT + Z", hl.dsp.exec_cmd(control_center))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(notifcenter))
-hl.bind("CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd("qs ipc call systemmonitor toggle"))
+hl.bind("CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(system_monitor))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.config/kabutor/scripts/record.sh"))
 hl.bind(mainMod .. " + D", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))

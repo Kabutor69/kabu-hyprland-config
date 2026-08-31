@@ -18,7 +18,7 @@ This README explains what to install, how to copy the config, and what commands 
 
 Check out the rice in action:
 
-📹 **[Preview Video](./Preview/2026-08-31%2012-43-28.mp4)** — Watch the setup and UI
+<video src="./Preview/preview.mp4" controls width="100%"></video>
 
 ---
 

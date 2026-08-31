@@ -1,0 +1,32 @@
+[General]
+Name=Kabutor Colors
+ColorScheme=Kabutor Colors
+
+[Colors:Window]
+BackgroundNormal={{colors.surface.default.hex}}
+ForegroundNormal={{colors.on_surface.default.hex}}
+DecorationFocus={{colors.primary.default.hex}}
+DecorationHover={{colors.secondary.default.hex}}
+
+[Colors:View]
+BackgroundNormal={{colors.surface.default.hex}}
+ForegroundNormal={{colors.on_surface.default.hex}}
+BackgroundAlternate={{colors.surface_variant.default.hex}}
+DecorationFocus={{colors.primary.default.hex}}
+DecorationHover={{colors.secondary.default.hex}}
+
+[Colors:Button]
+BackgroundNormal={{colors.surface_variant.default.hex}}
+ForegroundNormal={{colors.on_surface.default.hex}}
+DecorationFocus={{colors.primary.default.hex}}
+DecorationHover={{colors.secondary.default.hex}}
+
+[Colors:Selection]
+BackgroundNormal={{colors.primary.default.hex}}
+ForegroundNormal={{colors.on_primary.default.hex}}
+InactiveBackgroundNormal={{colors.primary_container.default.hex}}
+InactiveForegroundNormal={{colors.on_primary_container.default.hex}}
+
+[Colors:Tooltip]
+BackgroundNormal={{colors.surface_variant.default.hex}}
+ForegroundNormal={{colors.on_surface.default.hex}}

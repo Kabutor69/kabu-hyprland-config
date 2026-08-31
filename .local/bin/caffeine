@@ -1,0 +1,34 @@
+#!/bin/bash
+
+LOCK_FILE="$HOME/.cache/caffeine.lock"
+
+case "$1" in
+    --is-running)
+        if [ -f "$LOCK_FILE" ]; then
+            PID=$(cat "$LOCK_FILE")
+            if kill -0 "$PID" 2>/dev/null; then
+                echo "true"
+                exit 0
+            else
+                rm -f "$LOCK_FILE"
+                echo "false"
+                exit 0
+            fi
+        else
+            echo "false"
+            exit 0
+        fi
+        ;;
+    *)
+        if [ -f "$LOCK_FILE" ]; then
+            # Already running, stop it
+            PID=$(cat "$LOCK_FILE")
+            kill "$PID" 2>/dev/null
+            rm -f "$LOCK_FILE"
+        else
+            # Start a new inhibitor
+            systemd-inhibit --what=idle --why="Caffeine: Preventing screen lock" --mode=block sleep infinity &
+            echo $! > "$LOCK_FILE"
+        fi
+        ;;
+esac

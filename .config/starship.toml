@@ -1,0 +1,157 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+# ───────── LAYOUT ─────────
+
+format = """$directory$git_branch$git_status$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$haxe$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$python$raku$rlang$red$ruby$rust$scala$swift$terraform$vlang$zig$cmd_duration$time
+$character"""
+
+# ───────── DIRECTORY ─────────
+
+[directory]
+format = "[ $path](yellow)"
+truncation_length = 2
+truncate_to_repo = true
+home_symbol = "~"
+
+# ───────── GIT ─────────
+
+[git_branch]
+symbol = " "
+format = "[ · $symbol$branch](purple)"
+
+[git_status]
+format = "([$all_status$ahead_behind](red))"
+modified = "●"
+untracked = "?"
+staged = "+"
+ahead = "⇡"
+behind = "⇣"
+
+# ───────── LANGUAGES & RUNTIMES ─────────
+
+[c]
+format = "[ ·  ${version}](cyan)"
+
+[cmake]
+format = "[ ·  ${version}](cyan)"
+
+[cobol]
+format = "[ · ⚙️ ${version}](cyan)"
+
+[daml]
+format = "[ · ௵ ${version}](cyan)"
+
+[dart]
+format = "[ ·  ${version}](cyan)"
+
+[deno]
+format = "[ · 🦕 ${version}](cyan)"
+
+[dotnet]
+format = "[ ·  ${version}](cyan)"
+
+[elixir]
+format = "[ · 💧 ${version}](cyan)"
+
+[elm]
+format = "[ · 🌳 ${version}](cyan)"
+
+[erlang]
+format = "[ ·  ${version}](cyan)"
+
+[golang]
+format = "[ ·  ${version}](cyan)"
+
+[haskell]
+format = "[ ·  ${version}](cyan)"
+
+[haxe]
+format = "[ · ⌘ ${version}](cyan)"
+
+[helm]
+format = "[ · ⎈ ${version}](cyan)"
+
+[java]
+format = "[ ·  ${version}](cyan)"
+
+[julia]
+format = "[ ·  ${version}](cyan)"
+
+[kotlin]
+format = "[ · 🅺 ${version}](cyan)"
+
+[lua]
+format = "[ ·  ${version}](cyan)"
+
+[nim]
+format = "[ · 👑 ${version}](cyan)"
+
+[nodejs]
+format = "[ ·  ${version}](cyan)"
+
+[ocaml]
+format = "[ · 🐪 ${version}](cyan)"
+
+[perl]
+format = "[ · 🐪 ${version}](cyan)"
+
+[php]
+format = "[ · 🐘 ${version}](cyan)"
+
+[pulumi]
+format = "[ · 📦 ${version}](cyan)"
+
+[python]
+format = "[ ·  ${version}](cyan)"
+
+[raku]
+format = "[ · 🦋 ${version}](cyan)"
+
+[red]
+format = "[ · 🔺 ${version}](cyan)"
+
+[rlang]
+format = "[ · 󰟔 ${version}](cyan)"
+
+[ruby]
+format = "[ ·  ${version}](cyan)"
+
+[rust]
+format = "[ · 🦀 ${version}](cyan)"
+
+[scala]
+format = "[ ·  ${version}](cyan)"
+
+[swift]
+format = "[ ·  ${version}](cyan)"
+
+[terraform]
+format = "[ · 🛠️ ${version}](cyan)"
+
+[vlang]
+format = "[ · 🧺 ${version}](cyan)"
+
+[zig]
+format = "[ · ⚡ ${version}](cyan)"
+
+# ───────── COMMAND DURATION ─────────
+
+[cmd_duration]
+min_time = 0
+show_milliseconds = true
+format = "[ · 󱎫 $duration](bright-yellow)"
+
+# ───────── TIME ─────────
+
+[time]
+disabled = false
+time_format = "%H:%M"
+format = "[ ·  $time](bright-black)"
+
+# ───────── PROMPT CHARACTER ─────────
+
+[character]
+success_symbol = "[➜](bold white)"
+error_symbol = "[➜](bold red)"

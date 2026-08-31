@@ -1,0 +1,25 @@
+return {
+  'nvim-treesitter/nvim-treesitter',
+  lazy = false,
+  build = ':TSUpdate',
+  opts = {
+    ensure_installed = {
+      "lua",
+      "javascript",
+      "typescript",
+      "tsx",
+      "json",
+      "html",
+      "css",
+      "bash",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "c",
+      "cpp",
+    },
+    auto_install = true,
+    highlight = { enable = true },
+    indent = { enable = true },
+  },
+}

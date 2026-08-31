@@ -1,0 +1,32 @@
+[General]
+Name=Kabutor Colors
+ColorScheme=Kabutor Colors
+
+[Colors:Window]
+BackgroundNormal=#151218
+ForegroundNormal=#e7e0e8
+DecorationFocus=#d5bbfc
+DecorationHover=#cec2db
+
+[Colors:View]
+BackgroundNormal=#151218
+ForegroundNormal=#e7e0e8
+BackgroundAlternate=#49454e
+DecorationFocus=#d5bbfc
+DecorationHover=#cec2db
+
+[Colors:Button]
+BackgroundNormal=#49454e
+ForegroundNormal=#e7e0e8
+DecorationFocus=#d5bbfc
+DecorationHover=#cec2db
+
+[Colors:Selection]
+BackgroundNormal=#d5bbfc
+ForegroundNormal=#3a255b
+InactiveBackgroundNormal=#513c73
+InactiveForegroundNormal=#ecdcff
+
+[Colors:Tooltip]
+BackgroundNormal=#49454e
+ForegroundNormal=#e7e0e8

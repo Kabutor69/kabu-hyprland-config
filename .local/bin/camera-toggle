@@ -1,0 +1,12 @@
+#!/bin/bash
+USER_HOME="/home/kabutor"
+
+if lsmod | grep -q uvcvideo; then
+    for dev in /dev/video*; do
+        fuser -k "$dev" 2>/dev/null
+    done
+    sleep 0.5
+    sudo rmmod uvcvideo
+else
+    sudo modprobe uvcvideo
+fi

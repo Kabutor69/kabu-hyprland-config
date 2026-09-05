@@ -18,6 +18,8 @@ Item {
     property var battSystem
 
     signal closeRequested()
+    signal wifiListRequested()
+    signal bluetoothListRequested()
 
     width: parent ? parent.width : 380
     height: parent ? parent.height : 480
@@ -144,6 +146,7 @@ Item {
                         statusText: root.wifiSystem && root.wifiSystem.wifiEnabled ? (root.wifiSystem.connectedSsid || "On") : "Off"
                         active: root.wifiSystem ? root.wifiSystem.wifiEnabled : false
                         onClicked: if (root.wifiSystem) root.wifiSystem.toggle()
+                        onRightClicked: root.wifiListRequested()
                     }
 
                     ToggleTile {
@@ -154,6 +157,7 @@ Item {
                         statusText: root.btSystem && root.btSystem.isPowered ? (root.btSystem.connectedDevice || "On") : "Off"
                         active: root.btSystem ? root.btSystem.isPowered : false
                         onClicked: if (root.btSystem) root.btSystem.toggle()
+                        onRightClicked: root.bluetoothListRequested()
                     }
                 }
 
@@ -269,6 +273,7 @@ Item {
         property bool active: false
 
         signal clicked()
+        signal rightClicked()
 
         radius: Radius.tile
         color: active ? Colors.tileActiveBg : Colors.tileBg
@@ -321,9 +326,15 @@ Item {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             onEntered: if (!tile.active) tile.border.color = Colors.hover
             onExited: if (!tile.active) tile.border.color = Colors.tileBorder
-            onClicked: tile.clicked()
+            onClicked: (mouse) => {
+                if (mouse.button === Qt.RightButton)
+                    tile.rightClicked()
+                else
+                    tile.clicked()
+            }
         }
 
         Behavior on color { ColorAnimation { duration: 140 } }

@@ -25,7 +25,7 @@ Item {
 
         Text {
             id: warnIcon
-            text: "󰂃" 
+            text: "\udb80\udc83" 
             color: Colors.red
             font.family: "JetBrainsMono Nerd Font"
             font.pixelSize: 15

@@ -143,6 +143,36 @@ Rectangle {
             currentMode = "NORMAL"
     }
 
+    function toggleWifiList() {
+        if (currentMode === "WIFILIST") {
+            currentMode = "NORMAL"
+        } else {
+            osdTimeout.stop()
+            currentMode = "WIFILIST"
+            wifiListView.pulse()
+        }
+    }
+
+    function closeWifiList() {
+        if (currentMode === "WIFILIST")
+            currentMode = "NORMAL"
+    }
+
+    function toggleBluetoothList() {
+        if (currentMode === "BLUETOOTHLIST") {
+            currentMode = "NORMAL"
+        } else {
+            osdTimeout.stop()
+            currentMode = "BLUETOOTHLIST"
+            bluetoothListView.pulse()
+        }
+    }
+
+    function closeBluetoothList() {
+        if (currentMode === "BLUETOOTHLIST")
+            currentMode = "NORMAL"
+    }
+
     width:
         currentMode === "NORMAL" ? Wdth.normal
         : currentMode === "DRAWER" ? Wdth.drawer
@@ -157,6 +187,8 @@ Rectangle {
         : currentMode === "LOWBATTERY" ? Wdth.lowBattery
         : currentMode === "POWER" ? Wdth.power
         : currentMode === "SYSTEMMONITOR" ? Wdth.systemMonitor
+        : currentMode === "WIFILIST" ? Wdth.wifiList
+        : currentMode === "BLUETOOTHLIST" ? Wdth.bluetoothList
         : Wdth.defaultWidth
 
     height:
@@ -186,6 +218,8 @@ Rectangle {
         : currentMode === "LOWBATTERY" ? Height.lowBattery
         : currentMode === "POWER" ? Height.power
         : currentMode === "SYSTEMMONITOR" ? Height.systemMonitor
+        : currentMode === "WIFILIST" ? Height.wifiList
+        : currentMode === "BLUETOOTHLIST" ? Height.bluetoothList
         : Height.normal
 
     clip: true
@@ -219,7 +253,9 @@ Rectangle {
                 islandContainer.currentMode === "WALLPAPER" ||
                 islandContainer.currentMode === "CLIPBOARD" ||
                 islandContainer.currentMode === "CONTROLCENTER" ||
-                islandContainer.currentMode === "NOTIFICATIONCENTER"
+                islandContainer.currentMode === "NOTIFICATIONCENTER" ||
+                islandContainer.currentMode === "WIFILIST" ||
+                islandContainer.currentMode === "BLUETOOTHLIST"
             )
                 return
 
@@ -240,7 +276,9 @@ Rectangle {
                 islandContainer.currentMode === "WALLPAPER" ||
                 islandContainer.currentMode === "CLIPBOARD" ||
                 islandContainer.currentMode === "CONTROLCENTER" ||
-                islandContainer.currentMode === "NOTIFICATIONCENTER"
+                islandContainer.currentMode === "NOTIFICATIONCENTER" ||
+                islandContainer.currentMode === "WIFILIST" ||
+                islandContainer.currentMode === "BLUETOOTHLIST"
             )
                 return
 
@@ -260,7 +298,9 @@ Rectangle {
                 islandContainer.currentMode === "DRAWER" ||
                 islandContainer.currentMode === "WALLPAPER" ||
                 islandContainer.currentMode === "CLIPBOARD" ||
-                islandContainer.currentMode === "NOTIFICATIONCENTER"
+                islandContainer.currentMode === "NOTIFICATIONCENTER" ||
+                islandContainer.currentMode === "WIFILIST" ||
+                islandContainer.currentMode === "BLUETOOTHLIST"
             )
                 return
 
@@ -276,7 +316,9 @@ Rectangle {
                 islandContainer.currentMode === "DRAWER" ||
                 islandContainer.currentMode === "WALLPAPER" ||
                 islandContainer.currentMode === "CLIPBOARD" ||
-                islandContainer.currentMode === "NOTIFICATIONCENTER"
+                islandContainer.currentMode === "NOTIFICATIONCENTER" ||
+                islandContainer.currentMode === "WIFILIST" ||
+                islandContainer.currentMode === "BLUETOOTHLIST"
             )
                 return
 
@@ -296,7 +338,9 @@ Rectangle {
                 islandContainer.currentMode === "DRAWER" ||
                 islandContainer.currentMode === "WALLPAPER" ||
                 islandContainer.currentMode === "CLIPBOARD" ||
-                islandContainer.currentMode === "NOTIFICATIONCENTER"
+                islandContainer.currentMode === "NOTIFICATIONCENTER" ||
+                islandContainer.currentMode === "WIFILIST" ||
+                islandContainer.currentMode === "BLUETOOTHLIST"
             )
                 return
 
@@ -421,6 +465,14 @@ Rectangle {
         battSystem: battSystem
 
         onCloseRequested: islandContainer.closeControlCenter()
+        onWifiListRequested: {
+            islandContainer.closeControlCenter()
+            islandContainer.toggleWifiList()
+        }
+        onBluetoothListRequested: {
+            islandContainer.closeControlCenter()
+            islandContainer.toggleBluetoothList()
+        }
     }
 
     NotificationCenterView {
@@ -445,6 +497,20 @@ Rectangle {
         active: islandContainer.currentMode === "SYSTEMMONITOR"
         system: sysMonitor
         onCloseRequested: islandContainer.closeSystemMonitor()
+    }
+
+    WifiListView {
+        id: wifiListView
+        active: islandContainer.currentMode === "WIFILIST"
+        wifiSystem: wifiSystem
+        onCloseRequested: islandContainer.closeWifiList()
+    }
+
+    BluetoothListView {
+        id: bluetoothListView
+        active: islandContainer.currentMode === "BLUETOOTHLIST"
+        btSystem: btSystem
+        onCloseRequested: islandContainer.closeBluetoothList()
     }
 
     Behavior on width {

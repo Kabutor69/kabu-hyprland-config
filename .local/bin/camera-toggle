@@ -1,5 +1,5 @@
 #!/bin/bash
-USER_HOME="/home/kabutor"
+USER_HOME="$HOME"
 
 if lsmod | grep -q uvcvideo; then
     for dev in /dev/video*; do

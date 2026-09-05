@@ -1,4 +1,5 @@
 #!/bin/bash
+# Caffeine: Toggle idle inhibitor to prevent screen lock/sleep
 
 LOCK_FILE="$HOME/.cache/caffeine.lock"
 

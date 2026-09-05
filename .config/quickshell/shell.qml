@@ -45,7 +45,9 @@ ShellRoot {
             bar.currentMode === "CONTROLCENTER" ||
             bar.currentMode === "NOTIFICATIONCENTER" ||
             bar.currentMode === "POWER" ||
-            bar.currentMode === "SYSTEMMONITOR"
+            bar.currentMode === "SYSTEMMONITOR" ||
+            bar.currentMode === "WIFILIST" ||
+            bar.currentMode === "BLUETOOTHLIST"
 
         WlrLayershell.keyboardFocus:
             overlayModeActive
@@ -96,6 +98,16 @@ ShellRoot {
             function toggle(): void { bar.toggleSystemMonitor() }
         }
 
+        IpcHandler {
+            target: "wifilist"
+            function toggle(): void { bar.toggleWifiList() }
+        }
+
+        IpcHandler {
+            target: "bluetoothlist"
+            function toggle(): void { bar.toggleBluetoothList() }
+        }
+
         Item {
             id: windowMaskRegion
 
@@ -144,6 +156,10 @@ ShellRoot {
                         bar.closePower()
                     } else if (bar.currentMode === "SYSTEMMONITOR") {
                         bar.closeSystemMonitor()
+                    } else if (bar.currentMode === "WIFILIST") {
+                        bar.closeWifiList()
+                    } else if (bar.currentMode === "BLUETOOTHLIST") {
+                        bar.closeBluetoothList()
                     }
                 }
             }

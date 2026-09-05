@@ -459,7 +459,7 @@ Item {
                     id: clearAllText
                     anchors.centerIn: parent
                     text: "Clear History"
-                    color: clearAllHover.containsMouse ? Colors.text : Colors.red
+                    color: clearAllHover.containsMouse ? Colors.bg : Colors.red
                     font.family: "JetBrainsMono Nerd Font"
                     font.pixelSize: 9
                     font.bold: true

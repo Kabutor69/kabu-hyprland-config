@@ -1,11 +1,11 @@
 return {
-    primary = "rgba(d5bbfcff)",
-    secondary = "rgba(cec2dbff)",
-    tertiary = "rgba(f1b7c3ff)",
+    primary = "rgba(b3c5ffff)",
+    secondary = "rgba(c0c6ddff)",
+    tertiary = "rgba(e1bbdcff)",
 
-    background = "rgba(151218ff)",
-    surface = "rgba(151218ff)",
-    surface_variant = "rgba(49454eff)",
+    background = "rgba(121318ff)",
+    surface = "rgba(121318ff)",
+    surface_variant = "rgba(45464fff)",
 
-    inactive = "rgba(49454eee)",
+    inactive = "rgba(45464fee)",
 }

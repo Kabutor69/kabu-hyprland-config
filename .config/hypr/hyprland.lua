@@ -1,4 +1,5 @@
 -- ~/.config/hypr/hyprland.lua
+
 require("modules.exec")
 require("modules.monitor")
 require("modules.input")

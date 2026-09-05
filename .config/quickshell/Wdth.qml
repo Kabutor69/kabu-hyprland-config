@@ -16,5 +16,7 @@ QtObject {
     readonly property real lowBattery: 210
     readonly property real power: 275
     readonly property real systemMonitor: 560
+    readonly property real wifiList: 360
+    readonly property real bluetoothList: 360
     readonly property real defaultWidth: 220
 }

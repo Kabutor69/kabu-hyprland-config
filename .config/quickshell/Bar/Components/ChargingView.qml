@@ -43,18 +43,22 @@ Item {
                 anchors.centerIn: parent
 
                 text: {
-                    if (root.charging) return "󰂄"
-                    if (root.level < 20) return "\uf244"
-                    if (root.level < 40) return "\uf243"
-                    if (root.level < 60) return "\uf242"
-                    if (root.level < 80) return "\uf241"
-                    return "\uf240"
+                    if (root.charging) return "\udb80\udc84"
+                    if (root.level < 10) return "\udb80\udc7a"
+                    if (root.level < 20) return "\udb80\udc7b"
+                    if (root.level < 30) return "\udb80\udc7c"
+                    if (root.level < 40) return "\udb80\udc7d"
+                    if (root.level < 50) return "\udb80\udc7e"
+                    if (root.level < 60) return "\udb80\udc7f"
+                    if (root.level < 70) return "\udb80\udc80"
+                    if (root.level < 80) return "\udb80\udc81"
+                    if (root.level < 90) return "\udb80\udc82"
+                    return "\udb80\udc79"
                 }
                 color: root.levelColor
                 font.family: "JetBrainsMono Nerd Font"
-                font.pixelSize: 14
+                font.pixelSize: 15
                 renderType: Text.NativeRendering
-                rotation: -90 
 
                 SequentialAnimation {
                     id: battIconPulse

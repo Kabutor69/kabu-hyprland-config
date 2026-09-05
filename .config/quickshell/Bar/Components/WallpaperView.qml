@@ -396,7 +396,7 @@ Item {
             Text {
                 width: 130
                 horizontalAlignment: Text.AlignRight
-                text: "← → Navigate  |  ↵ Apply"
+                text: "← → Navigate  |  ↵ Apply | Esc Close"
                 color: Colors.muted
                 font.family: "JetBrainsMono Nerd Font"
                 font.pixelSize: 9

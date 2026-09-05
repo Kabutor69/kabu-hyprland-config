@@ -148,17 +148,6 @@ Item {
             Item { Layout.fillWidth: true }
 
             
-            ActionButton {
-                glyph: "\uf014"
-                tooltipText: "Clear All"
-                visible: root.totalCount > 0
-                onClicked: {
-                    if (root.system) root.system.clearAll();
-                    root.expandedGroups = ({});
-                }
-            }
-
-            
             Rectangle {
                 id: batteryIcon
                 property bool charging: root.battSystem && root.battSystem.isCharging
@@ -513,6 +502,56 @@ Item {
                     }
                 }
             }
+        }
+
+        Row {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 18
+            // visible: root.totalCount > 0
+
+            Rectangle {
+                height: 18
+                width: clearAllText.implicitWidth + 12
+                radius: Radius.small
+                color: clearAllHover.containsMouse ? Colors.red : Colors.transparent
+
+                Behavior on color { ColorAnimation { duration: 100 } }
+
+                Text {
+                    id: clearAllText
+                    anchors.centerIn: parent
+                    text: "Clear All"
+                    color: clearAllHover.containsMouse ? Colors.bg : Colors.red
+                    font.family: "JetBrainsMono Nerd Font"
+                    font.pixelSize: 9
+                    font.bold: true
+                    renderType: Text.NativeRendering
+                }
+
+                MouseArea {
+                    id: clearAllHover
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (root.system) root.system.clearAll();
+                        root.expandedGroups = ({});
+                    }
+                }
+            }
+
+            Item { width: parent.width - clearAllText.implicitWidth - hintText.implicitWidth - 12; height: 1 }
+
+            Text {
+                id: hintText
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Esc Close"
+                color: Colors.muted
+                font.family: "JetBrainsMono Nerd Font"
+                font.pixelSize: 9
+                renderType: Text.NativeRendering
+            }
+
         }
     }
 

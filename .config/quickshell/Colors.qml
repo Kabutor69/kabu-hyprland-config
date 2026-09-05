@@ -8,44 +8,44 @@ QtObject {
     readonly property color bg: "#000000"
     
     // Dynamic Material You Surfaces & Containers
-    readonly property color surface: "#0f0d12"
-    readonly property color elevated: "#2c292f"
-    readonly property color border: "#49454e"
-    readonly property color borderLight: "#958e99"
+    readonly property color surface: "#0d0e13"
+    readonly property color elevated: "#292a2f"
+    readonly property color border: "#45464f"
+    readonly property color borderLight: "#8f909a"
 
     // Dynamic Material You Accents
-    readonly property color blue: "#d5bbfc"
-    readonly property color blueMuted: "#513c73"
-    readonly property color cyan: "#cec2db"
-    readonly property color purple: "#f1b7c3"
-    readonly property color green: "#d5bbfc"
-    readonly property color yellow: "#f1b7c3"
-    readonly property color orange: "#4c4357"
+    readonly property color blue: "#b3c5ff"
+    readonly property color blueMuted: "#314578"
+    readonly property color cyan: "#c0c6dd"
+    readonly property color purple: "#e1bbdc"
+    readonly property color green: "#b3c5ff"
+    readonly property color yellow: "#e1bbdc"
+    readonly property color orange: "#414659"
     readonly property color red: "#ffb4ab"
-    readonly property color pink: "#643b44"
+    readonly property color pink: "#5a3d58"
 
     // Control Accents
     readonly property color volumeAccent: blue
     readonly property color brightnessAccent: yellow
     readonly property color muteAccent: red
-    readonly property color osdTrackBg: "#211e24"
+    readonly property color osdTrackBg: "#1e1f25"
 
     // Typography
-    readonly property color text: "#e7e0e8"
-    readonly property color textSecondary: "#cbc4cf"
-    readonly property color disabled: "#958e99"
-    readonly property color muted: "#49454e"
+    readonly property color text: "#e3e2e9"
+    readonly property color textSecondary: "#c5c6d0"
+    readonly property color disabled: "#8f909a"
+    readonly property color muted: "#45464f"
 
     // Workspaces
-    readonly property color workspaceActive: "#d5bbfc"       
-    readonly property color workspaceOccupied: "#cbc4cf"   
-    readonly property color workspaceInactive: "#49454e"   
+    readonly property color workspaceActive: "#b3c5ff"       
+    readonly property color workspaceOccupied: "#c5c6d0"   
+    readonly property color workspaceInactive: "#45464f"   
 
     // Tiles & Cards
-    readonly property color tileBg: "#1d1a20"
-    readonly property color tileActiveBg: "#513c73"
-    readonly property color tileBorder: "#49454e"
-    readonly property color tileActiveBorder: "#d5bbfc"
+    readonly property color tileBg: "#1a1b21"
+    readonly property color tileActiveBg: "#314578"
+    readonly property color tileBorder: "#45464f"
+    readonly property color tileActiveBorder: "#b3c5ff"
 
     // Status
     readonly property color success: green

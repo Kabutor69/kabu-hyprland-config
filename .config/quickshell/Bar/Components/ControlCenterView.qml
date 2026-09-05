@@ -347,6 +347,7 @@ Item {
         property real level: 0
         property color fillColor: Colors.blue
         property bool seeking: false
+        property real dragLevel: level
 
         signal levelDragged(real newLevel)
 
@@ -375,7 +376,7 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
-                height: Math.max(0, Math.min(1, vbar.level / 100)) * parent.height
+                height: Math.max(0, Math.min(1, (vbar.seeking ? vbar.dragLevel : vbar.level) / 100)) * parent.height
                 color: vbar.fillColor
 
                 Behavior on color {
@@ -405,14 +406,14 @@ Item {
             function setFromY(y) {
                 const fraction = 1 - Math.max(0, Math.min(1, y / vbar.height));
                 const targetLevel = Math.round(fraction * 100);
-                vbar.level = targetLevel;
+                    vbar.dragLevel = targetLevel;
                 vbar.levelDragged(targetLevel);
             }
 
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             preventStealing: true
-            onPressed: (mouse) => { vbar.seeking = true; setFromY(mouse.y); }
+            onPressed: (mouse) => { vbar.seeking = true; vbar.dragLevel = vbar.level; setFromY(mouse.y); }
             onPositionChanged: (mouse) => { if (pressed) setFromY(mouse.y); }
             onReleased: (mouse) => { setFromY(mouse.y); vbar.seeking = false; }
         }

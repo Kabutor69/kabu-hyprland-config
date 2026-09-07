@@ -14,7 +14,7 @@ QtObject {
     readonly property real controlCenter: 480
     readonly property real notificationCenter: 460
     readonly property real lowBattery: 210
-    readonly property real power: 275
+    readonly property real power: 395
     readonly property real systemMonitor: 560
     readonly property real wifiList: 360
     readonly property real bluetoothList: 360

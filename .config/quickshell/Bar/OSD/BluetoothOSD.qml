@@ -6,6 +6,7 @@ import "../../"
 Item {
     id: btOsd
 
+    property bool active: true
     property bool isPowered: false
     property string connectedDevice: ""
     property bool initialized: false
@@ -59,10 +60,11 @@ Item {
 
     Timer {
         interval: 5000
-        running: true
+        running: btOsd.active
         repeat: true
         onTriggered: prober.running = true
     }
 
     Component.onCompleted: prober.running = true
+    onActiveChanged: if (active) prober.running = true
 }

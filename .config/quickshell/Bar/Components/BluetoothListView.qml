@@ -267,6 +267,8 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: Colors.islandBg
+        radius: Radius.island
+        clip: true
 
         ColumnLayout {
             anchors.fill: parent
@@ -314,7 +316,7 @@ Item {
                             renderType: Text.NativeRendering
 
                             RotationAnimation on rotation {
-                                running: root.scanning
+                                running: root.visible && root.scanning
                                 from: 0; to: 360
                                 duration: 800
                                 loops: Animation.Infinite
@@ -411,7 +413,7 @@ Item {
                         renderType: Text.NativeRendering
 
                         SequentialAnimation on opacity {
-                            running: root.scanning && root.devices.length === 0
+                            running: root.visible && root.scanning && root.devices.length === 0
                             loops: Animation.Infinite
                             NumberAnimation { to: 0.25; duration: 700; easing.type: Easing.InOutSine }
                             NumberAnimation { to: 1.0; duration: 700; easing.type: Easing.InOutSine }
@@ -532,7 +534,7 @@ Item {
                             renderType: Text.NativeRendering
 
                             RotationAnimation on rotation {
-                                running: root.unpairingMac === (root.connectedDevice ? root.connectedDevice.mac : "")
+                                running: root.visible && root.unpairingMac === (root.connectedDevice ? root.connectedDevice.mac : "")
                                 from: 0; to: 360
                                 duration: 800
                                 loops: Animation.Infinite
@@ -758,7 +760,7 @@ Item {
                                         renderType: Text.NativeRendering
 
                                         SequentialAnimation on opacity {
-                                            running: deviceDelegate.isConnecting
+                                            running: root.visible && deviceDelegate.isConnecting
                                             loops: Animation.Infinite
                                             NumberAnimation { to: 0.3; duration: 500 }
                                             NumberAnimation { to: 1.0; duration: 500 }
@@ -815,7 +817,7 @@ Item {
                                     renderType: Text.NativeRendering
 
                                     RotationAnimation on rotation {
-                                        running: deviceDelegate.isUnpairing
+                                        running: root.visible && deviceDelegate.isUnpairing
                                         from: 0; to: 360
                                         duration: 800
                                         loops: Animation.Infinite

@@ -29,6 +29,7 @@ Item {
 
     property real currentPos: activePlayer ? activePlayer.position : 0
     property bool seeking: false
+    property bool active: false
 
     function sanitizeUrl(urlStr) {
         if (!urlStr || urlStr === "") return "";
@@ -63,7 +64,7 @@ Item {
 
     Timer {
         interval: 500
-        running: root.isPlaying && !root.seeking
+        running: root.active && root.isPlaying && !root.seeking
         repeat: true
         onTriggered: {
             if (root.activePlayer) root.currentPos = root.activePlayer.position;

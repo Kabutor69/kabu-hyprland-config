@@ -20,7 +20,7 @@ Item {
 
     Timer {
         interval: 3000
-        running: true
+        running: root.active
         repeat: true
         onTriggered: root.appRefresh++
     }

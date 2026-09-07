@@ -169,8 +169,8 @@ Item {
                     ToggleTile {
                         width: (parent.width - 8) / 2
                         height: parent.height
-                        glyph: "\uf186"
-                        label: "DND"
+                        glyph: "\ueeef"
+                        label: "Peace"
                         statusText: DndState.enabled ? "On" : "Off"
                         active: DndState.enabled
                         onClicked: DndState.enabled = !DndState.enabled
@@ -259,6 +259,7 @@ Item {
         
         MediaControlCard {
             id: mediaCard
+            active: root.active
             Layout.fillWidth: true
             Layout.preferredHeight: 104
         }

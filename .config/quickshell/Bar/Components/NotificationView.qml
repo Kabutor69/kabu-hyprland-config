@@ -46,16 +46,22 @@ Item {
         if (!root.system)
             return
 
-        const needle = ((root.system.notifAppName || root.system.notifTitle || "")).toLowerCase()
+        const needle = (
+            root.system.notifAppName ||
+            root.system.notifTitle ||
+            ""
+        ).toLowerCase()
+
         if (needle.length < 2)
             return
 
         Hyprland.refreshToplevels()
+
         const wins = Hyprland.toplevels.values
 
         for (let i = 0; i < wins.length; i++) {
             const w = wins[i]
-            const rawCls = (w.wmClass || w.class || "")
+            const rawCls = w.wmClass || w.class || ""
             const cls = rawCls.toLowerCase()
             const title = (w.title || "").toLowerCase()
 
@@ -107,18 +113,24 @@ Item {
 
     width: 250
     height: parent ? parent.height : 32
+
     anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
+
     opacity: active ? 1 : 0
     scale: active ? 1 : 0.85
     y: active ? 0 : 4
+
     visible: opacity > 0
 
     Row {
         anchors.left: parent.left
         anchors.leftMargin: 12
+
         anchors.right: parent.right
         anchors.rightMargin: 12
+
         anchors.verticalCenter: parent.verticalCenter
+
         spacing: 10
 
         Item {
@@ -126,7 +138,9 @@ Item {
 
             width: 22
             height: 22
+
             anchors.verticalCenter: parent.verticalCenter
+
             scale: 1
 
             SequentialAnimation {
@@ -150,19 +164,30 @@ Item {
                 }
             }
 
-            readonly property bool hasDistinctImage:
+            readonly property bool hasImage:
                 root.system &&
-                root.system.notifImage !== "" &&
-                root.system.notifAppIcon !== "" &&
+                root.system.notifImage &&
+                root.system.notifImage !== ""
+
+            readonly property bool hasAppIcon:
+                root.system &&
+                root.system.notifAppIcon &&
+                root.system.notifAppIcon !== ""
+
+            readonly property bool hasDistinctImage:
+                hasImage &&
+                hasAppIcon &&
                 root.system.notifImage !== root.system.notifAppIcon
 
-            
             Item {
                 id: notifImageWrapper
+
                 anchors.fill: parent
-                visible: notifIconImg.visible
+
+                visible: notifIconImg.status === Image.Ready
 
                 layer.enabled: true
+
                 layer.effect: OpacityMask {
                     maskSource: Rectangle {
                         width: notifImageWrapper.width
@@ -176,27 +201,35 @@ Item {
 
                     anchors.fill: parent
 
-                    source: root.imageSource(
-                        root.system
-                        ? (root.system.notifAppIcon || root.system.notifImage || "")
-                        : ""
-                    )
+                    source: notifIconBadge.hasImage
+                        ? root.system.notifImage
+                        : root.imageSource(
+                            root.system
+                            ? root.system.notifAppIcon
+                            : ""
+                        )
 
                     fillMode: Image.PreserveAspectCrop
-                    asynchronous: true
-                    visible: status === Image.Ready
+
+                    cache: false
                 }
             }
 
-            
             Rectangle {
                 width: 10
                 height: 10
+
                 radius: 5
+
                 color: Colors.islandBg
-                visible: notifIconBadge.hasDistinctImage
+
+                visible:
+                    notifIconBadge.hasDistinctImage &&
+                    notifIconImg.status === Image.Ready
+
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
+
                 anchors.rightMargin: -2
                 anchors.bottomMargin: -2
 
@@ -206,28 +239,35 @@ Item {
                     anchors.fill: parent
                     anchors.margins: 1
 
-                    source: notifIconBadge.hasDistinctImage && root.system
-                        ? root.imageSource(root.system.notifAppIcon || "")
+                    source:
+                        notifIconBadge.hasAppIcon
+                        ? root.imageSource(root.system.notifAppIcon)
                         : ""
 
                     fillMode: Image.PreserveAspectFit
-                    asynchronous: true
+
+                    cache: false
+
                     visible: status === Image.Ready
                 }
             }
 
-            
             Text {
                 id: notifIcon
 
                 anchors.centerIn: parent
-                visible: !notifIconImg.visible
+
+                visible: notifIconImg.status !== Image.Ready
+
                 text: "\uf0f3"
+
                 color: root.isCritical
                     ? Colors.red
                     : Colors.textSecondary
+
                 font.family: "JetBrainsMono Nerd Font"
                 font.pixelSize: 16
+
                 renderType: Text.NativeRendering
 
                 Behavior on color {
@@ -237,15 +277,19 @@ Item {
                 }
             }
 
-            
             Rectangle {
                 width: 7
                 height: 7
+
                 radius: 3.5
+
                 color: Colors.red
+
                 visible: root.isCritical
+
                 anchors.right: parent.right
                 anchors.top: parent.top
+
                 anchors.rightMargin: -2
                 anchors.topMargin: -2
             }
@@ -253,29 +297,43 @@ Item {
 
         Column {
             anchors.verticalCenter: parent.verticalCenter
+
             spacing: root.hasBody ? 1 : 0
+
             width: parent.width - notifIconBadge.width - parent.spacing
 
             Text {
-                text: root.system && root.system.notifTitle ? root.system.notifTitle : ""
+                text:
+                    root.system && root.system.notifTitle
+                    ? root.system.notifTitle
+                    : ""
+
                 color: Colors.text
+
                 font.family: "JetBrainsMono Nerd Font"
                 font.pixelSize: 12
                 font.bold: true
                 font.letterSpacing: 0.2
+
                 elide: Text.ElideRight
                 width: parent.width
+
                 renderType: Text.NativeRendering
             }
 
             Text {
                 text: root.cleanBody
+
                 color: Colors.textSecondary
+
                 font.family: "JetBrainsMono Nerd Font"
                 font.pixelSize: 10
+
                 elide: Text.ElideRight
                 width: parent.width
+
                 renderType: Text.NativeRendering
+
                 visible: root.hasBody
             }
         }
@@ -283,7 +341,9 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+
         cursorShape: Qt.PointingHandCursor
+
         onClicked: root.focusOrLaunch()
     }
 

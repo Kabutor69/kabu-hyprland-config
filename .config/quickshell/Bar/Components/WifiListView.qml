@@ -266,6 +266,8 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: Colors.islandBg
+        radius: Radius.island
+        clip: true
 
         ColumnLayout {
             anchors.fill: parent
@@ -313,7 +315,7 @@ Item {
                             renderType: Text.NativeRendering
 
                             RotationAnimation on rotation {
-                                running: root.scanning
+                                running: root.visible && root.scanning
                                 from: 0; to: 360
                                 duration: 800
                                 loops: Animation.Infinite
@@ -410,7 +412,7 @@ Item {
                         renderType: Text.NativeRendering
 
                         SequentialAnimation on opacity {
-                            running: root.scanning && root.networks.length === 0
+                            running: root.visible && root.scanning && root.networks.length === 0
                             loops: Animation.Infinite
                             NumberAnimation { to: 0.25; duration: 700; easing.type: Easing.InOutSine }
                             NumberAnimation { to: 1.0; duration: 700; easing.type: Easing.InOutSine }
@@ -526,7 +528,7 @@ Item {
                             renderType: Text.NativeRendering
 
                             RotationAnimation on rotation {
-                                running: root.forgettingSsid === (root.connectedNetwork ? root.connectedNetwork.ssid : "")
+                                running: root.visible && root.forgettingSsid === (root.connectedNetwork ? root.connectedNetwork.ssid : "")
                                 from: 0; to: 360
                                 duration: 800
                                 loops: Animation.Infinite
@@ -554,6 +556,78 @@ Item {
                     onClicked: {
                         if (root.connectedNetwork) {
                             root.forgetNetwork(root.connectedNetwork.ssid)
+                        }
+                    }
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                visible: !root.scanning
+                         && root.connectedNetwork !== null
+                         && root.availableNetworks.length === 0
+                         && (root.wifiSystem && root.wifiSystem.wifiEnabled)
+
+                ColumnLayout {
+                    anchors.centerIn: parent
+                    spacing: 10
+
+                    Rectangle {
+                        Layout.alignment: Qt.AlignHCenter
+                        width: 44
+                        height: 44
+                        radius: Radius.capsule
+                        color: Colors.elevated
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "\uf05a"
+                            color: Colors.muted
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 18
+                            renderType: Text.NativeRendering
+                        }
+                    }
+
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "No other networks nearby"
+                        color: Colors.disabled
+                        font.family: "JetBrainsMono Nerd Font"
+                        font.pixelSize: 10
+                        renderType: Text.NativeRendering
+                    }
+
+                    Rectangle {
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 4
+                        width: retryLabel2.implicitWidth + 20
+                        height: 24
+                        radius: Radius.capsule
+                        color: retryMa2.containsMouse ? Colors.elevated : Colors.tileBg
+                        border.color: Colors.tileBorder
+                        border.width: 1
+
+                        Behavior on color { ColorAnimation { duration: 120 } }
+
+                        Text {
+                            id: retryLabel2
+                            anchors.centerIn: parent
+                            text: "\uf021  Scan again"
+                            color: Colors.blue
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 9
+                            font.bold: true
+                            renderType: Text.NativeRendering
+                        }
+
+                        MouseArea {
+                            id: retryMa2
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
+                            onClicked: rescanProcess.running = true
                         }
                     }
                 }
@@ -753,7 +827,7 @@ Item {
                                         renderType: Text.NativeRendering
 
                                         SequentialAnimation on opacity {
-                                            running: networkDelegate.isConnecting
+                                            running: root.visible && networkDelegate.isConnecting
                                             loops: Animation.Infinite
                                             NumberAnimation { to: 0.3; duration: 500 }
                                             NumberAnimation { to: 1.0; duration: 500 }
@@ -800,7 +874,7 @@ Item {
                                     renderType: Text.NativeRendering
 
                                     RotationAnimation on rotation {
-                                        running: networkDelegate.isForgetting
+                                        running: root.visible && networkDelegate.isForgetting
                                         from: 0; to: 360
                                         duration: 800
                                         loops: Animation.Infinite

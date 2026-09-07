@@ -352,12 +352,24 @@ Rectangle {
         }
     }
 
-    SystemMonitorOSD { id: sysMonitor }
+    SystemMonitorOSD {
+        id: sysMonitor
+        active: islandContainer.currentMode === "SYSTEMMONITOR"
+    }
     NetworkOSD { id: wifiSystem }
-    BluetoothOSD { id: btSystem }
+    BluetoothOSD {
+        id: btSystem
+        active: islandContainer.currentMode === "CONTROLCENTER"
+    }
     MicOSD { id: micSystem }
-    CameraOSD { id: camSystem }
-    CaffeineOSD { id: caffeineSystem }
+    CameraOSD {
+        id: camSystem
+        active: islandContainer.currentMode === "CONTROLCENTER"
+    }
+    CaffeineOSD {
+        id: caffeineSystem
+        active: islandContainer.currentMode === "CONTROLCENTER"
+    }
 
     Timer {
         id: osdTimeout

@@ -36,7 +36,7 @@ Item {
     }
 
     Timer {
-        interval: 1000
+        interval: 60000
         running: true
         repeat: true
         onTriggered: clockText.text = Qt.formatTime(new Date(), "HH:mm")

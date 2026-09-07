@@ -6,6 +6,7 @@ import "../../"
 Item {
     id: camOsd
 
+    property bool active: true
     property bool isOn: false
     property bool initialized: false
 
@@ -50,10 +51,11 @@ Item {
 
     Timer {
         interval: 4000
-        running: true
+        running: camOsd.active
         repeat: true
         onTriggered: prober.running = true
     }
 
     Component.onCompleted: prober.running = true
+    onActiveChanged: if (active) prober.running = true
 }

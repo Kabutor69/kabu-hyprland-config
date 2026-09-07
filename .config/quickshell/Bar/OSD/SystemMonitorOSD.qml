@@ -6,6 +6,7 @@ import "../../"
 Item {
     id: sysMonitor
 
+    property bool active: false
     property real cpuPercent: 0
     property real cpuTemp: 0
     property real memPercent: 0
@@ -44,9 +45,11 @@ Item {
 
     Component.onCompleted: refresh()
 
+    onActiveChanged: if (active) refresh()
+
     Timer {
-        interval: 1500
-        running: true
+        interval: 2000
+        running: sysMonitor.active
         repeat: true
         onTriggered: sysMonitor.refresh()
     }

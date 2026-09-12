@@ -1,0 +1,55 @@
+:root {
+    --accent-color: #864b70;
+    --accent-bg-color: #864b70;
+    --accent-fg-color: #ffffff;
+
+    --window-bg-color: #fff8f8;
+    --window-fg-color: #211a1d;
+
+    --view-bg-color: #fff8f8;
+    --view-fg-color: #211a1d;
+
+    --headerbar-bg-color: #fff8f8;
+    --headerbar-fg-color: #211a1d;
+
+    --card-bg-color: #f0dee5;
+    --card-fg-color: #4f4349;
+}
+
+window,
+.background {
+    background-color: #fff8f8;
+    color: #211a1d;
+}
+
+headerbar {
+    background-color: #fff8f8;
+    color: #211a1d;
+}
+
+button {
+    background-color: #f0dee5;
+    color: #4f4349;
+}
+
+button:hover {
+    background-color: #ffd8ec;
+    color: #37072a;
+}
+
+entry,
+textview,
+.view {
+    background-color: #fff8f8;
+    color: #211a1d;
+}
+
+selection {
+    background-color: #864b70;
+    color: #ffffff;
+}
+
+checkbutton:checked,
+radiobutton:checked {
+    color: #864b70;
+}

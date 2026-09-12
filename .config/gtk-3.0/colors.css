@@ -1,0 +1,58 @@
+@define-color theme_bg_color #fff8f8;
+@define-color theme_fg_color #211a1d;
+
+@define-color theme_base_color #fff8f8;
+@define-color theme_text_color #211a1d;
+
+@define-color theme_selected_bg_color #864b70;
+@define-color theme_selected_fg_color #ffffff;
+
+@define-color theme_unfocused_bg_color #fff8f8;
+@define-color theme_unfocused_fg_color #211a1d;
+
+@define-color theme_unfocused_base_color #fff8f8;
+@define-color theme_unfocused_text_color #211a1d;
+
+@define-color borders #81737a;
+@define-color unfocused_borders #d3c2c9;
+
+* {
+    -GtkWidget-link-color: #864b70;
+    -GtkWidget-visited-link-color: #80543d;
+    -GtkWidget-focus-padding: 0;
+    -GtkWidget-focus-line-width: 0;
+}
+
+window,
+dialog {
+    background-color: #fff8f8;
+    color: #211a1d;
+}
+
+headerbar {
+    background-color: #fff8f8;
+    color: #211a1d;
+}
+
+button {
+    background-color: #f0dee5;
+    color: #4f4349;
+}
+
+button:hover {
+    background-color: #ffd8ec;
+    color: #37072a;
+}
+
+entry,
+spinbutton,
+combobox,
+notebook {
+    background-color: #fff8f8;
+    color: #211a1d;
+}
+
+selection {
+    background-color: #864b70;
+    color: #ffffff;
+}

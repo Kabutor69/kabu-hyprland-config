@@ -3,49 +3,49 @@ pragma Singleton
 
 QtObject {
     readonly property color islandBg: "#ffffff"   
-    readonly property color islandBorder: "#c7c5d0"
-    readonly property color islandBorderMuted: "#777680"
-    readonly property color bg: "#fbf8ff"
+    readonly property color islandBorder: "#d3c2c9"
+    readonly property color islandBorderMuted: "#827379"
+    readonly property color bg: "#fff8f8"
     
     // Dynamic Material You Surfaces & Containers
     readonly property color surface: "#ffffff"
-    readonly property color elevated: "#eae7ef"
-    readonly property color border: "#c7c5d0"
-    readonly property color borderLight: "#777680"
+    readonly property color elevated: "#f3e4e9"
+    readonly property color border: "#d3c2c9"
+    readonly property color borderLight: "#827379"
 
     // Dynamic Material You Accents
-    readonly property color blue: "#555a92"
-    readonly property color blueMuted: "#e0e0ff"
-    readonly property color cyan: "#5c5d72"
-    readonly property color purple: "#78536b"
-    readonly property color green: "#555a92"
-    readonly property color yellow: "#78536b"
-    readonly property color orange: "#e1e0f9"
+    readonly property color blue: "#874b6d"
+    readonly property color blueMuted: "#ffd8ea"
+    readonly property color cyan: "#715764"
+    readonly property color purple: "#80543c"
+    readonly property color green: "#874b6d"
+    readonly property color yellow: "#80543c"
+    readonly property color orange: "#fcd9e9"
     readonly property color red: "#ba1a1a"
-    readonly property color pink: "#ffd8ee"
+    readonly property color pink: "#ffdbca"
 
     // Control Accents
     readonly property color volumeAccent: blue
     readonly property color brightnessAccent: yellow
     readonly property color muteAccent: red
-    readonly property color osdTrackBg: "#f0ecf4"
+    readonly property color osdTrackBg: "#f9eaef"
 
     // Typography
-    readonly property color text: "#1b1b21"
-    readonly property color textSecondary: "#46464f"
-    readonly property color disabled: "#777680"
-    readonly property color muted: "#c7c5d0"
+    readonly property color text: "#211a1d"
+    readonly property color textSecondary: "#504349"
+    readonly property color disabled: "#827379"
+    readonly property color muted: "#d3c2c9"
 
     // Workspaces
-    readonly property color workspaceActive: "#555a92"       
-    readonly property color workspaceOccupied: "#46464f"   
-    readonly property color workspaceInactive: "#c7c5d0"   
+    readonly property color workspaceActive: "#874b6d"       
+    readonly property color workspaceOccupied: "#504349"   
+    readonly property color workspaceInactive: "#d3c2c9"   
 
     // Tiles & Cards
-    readonly property color tileBg: "#f5f2fa"
-    readonly property color tileActiveBg: "#e0e0ff"
-    readonly property color tileBorder: "#c7c5d0"
-    readonly property color tileActiveBorder: "#555a92"
+    readonly property color tileBg: "#fff0f5"
+    readonly property color tileActiveBg: "#ffd8ea"
+    readonly property color tileBorder: "#d3c2c9"
+    readonly property color tileActiveBorder: "#874b6d"
 
     // Status
     readonly property color success: green

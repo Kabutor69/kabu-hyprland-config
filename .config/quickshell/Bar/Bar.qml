@@ -6,6 +6,7 @@ import "./Components"
 import QtQuick
 import QtQuick.Effects
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.SystemTray
 
 Rectangle {
@@ -13,6 +14,46 @@ Rectangle {
 
     property string currentMode: "NORMAL"
     property var activeTrayMenu: null
+
+    function canRestoreMode(mode) {
+        return mode === "CONTROLCENTER"
+    }
+
+    Process {
+        id: themeViewStateProcess
+        running: true
+        command: ["sh", "-c", "state=$(cat \"$HOME/.cache/quickshell-theme-view\" 2>/dev/null); rm -f \"$HOME/.cache/quickshell-theme-view\"; printf '%s' \"$state\""]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const mode = text.trim()
+                if (canRestoreMode(mode)) {
+                    islandContainer.currentMode = mode
+                    themeRestoreAnimation.start()
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: themeRestoreVeil
+        anchors.fill: parent
+        z: 100
+        color: Colors.surface
+        opacity: 0
+        visible: opacity > 0
+    }
+
+    SequentialAnimation {
+        id: themeRestoreAnimation
+        PropertyAction { target: themeRestoreVeil; property: "opacity"; value: 0.9 }
+        NumberAnimation {
+            target: themeRestoreVeil
+            property: "opacity"
+            to: 0
+            duration: 650
+            easing.type: Easing.OutCubic
+        }
+    }
 
     function toggleDrawer() {
         if (currentMode === "DRAWER") {
@@ -237,9 +278,9 @@ Rectangle {
     layer.effect: MultiEffect {
         shadowEnabled: true
         shadowColor: Colors.shadow
-        shadowOpacity: 0.8
-        shadowBlur: 1.0
-        shadowVerticalOffset: 6
+        shadowOpacity: 0.5
+        shadowBlur: 0.6
+        shadowVerticalOffset: 1
         shadowHorizontalOffset: 0
         shadowScale: 1.02
     }

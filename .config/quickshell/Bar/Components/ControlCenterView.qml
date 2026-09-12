@@ -16,6 +16,7 @@ Item {
     property var volSystem
     property var brightSystem
     property var battSystem
+    property bool nightLightEnabled: false
 
     signal closeRequested()
     signal wifiListRequested()
@@ -62,15 +63,72 @@ Item {
         onTriggered: dateText.text = Qt.formatDate(new Date(), "dddd, MMM d")
     }
 
+    property bool isDark: true
+
+    onActiveChanged: {
+        if (active) {
+            themeInitProcess.running = true
+        }
+    }
+
+    function toggleTheme() {
+        root.isDark = !root.isDark
+        themeProcess.command = ["sh", "-c", "$HOME/.local/bin/toggle-theme.sh " + (root.isDark ? "dark" : "light") + " CONTROLCENTER"]
+        themeProcess.running = true
+    }
+
+    function refreshNightLight() {
+        nightLightCheckProcess.running = true
+    }
+
+    function toggleNightLight() {
+        if (root.nightLightEnabled) {
+            nightLightStopProcess.running = true
+        } else {
+            nightLightProcess.running = true
+        }
+        refreshNightLight()
+        nightLightRefreshTimer.restart()
+    }
+
+    Process {
+        id: themeInitProcess
+        running: true
+        command: ["sh", "-c", "cat $HOME/.cache/theme-mode 2>/dev/null || echo dark"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.isDark = (text.trim() !== "light")
+            }
+        }
+    }
+
+    Process { id: themeProcess }
     Process { id: volSetProcess }
     Process { id: brightSetProcess }
+    Process { id: nightLightProcess; command: ["hyprsunset"] }
+    Process {
+        id: nightLightCheckProcess
+        command: ["pgrep", "-x", "hyprsunset"]
+        stdout: StdioCollector {
+            onStreamFinished: root.nightLightEnabled = text.trim().length > 0
+        }
+    }
+    Process {
+        id: nightLightStopProcess
+        command: ["pkill", "-x", "hyprsunset"]
+        onExited: root.refreshNightLight()
+    }
+    Timer {
+        id: nightLightRefreshTimer
+        interval: 250
+        onTriggered: root.refreshNightLight()
+    }
 
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 14
         spacing: 12
 
-        
         RowLayout {
             Layout.fillWidth: true
             Layout.preferredHeight: Height.header
@@ -121,13 +179,11 @@ Item {
             }
         }
 
-        
         Row {
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 10
 
-            
             Column {
                 width: parent.width * 0.68
                 height: parent.height
@@ -192,35 +248,45 @@ Item {
                     height: (parent.height - 16) / 3
                     spacing: 8
 
-                    ToggleTile {
-                        width: (parent.width - 8) / 2
+                    IconTile {
+                        width: (parent.width - 24) / 4
                         height: parent.height
                         glyph: "\uf030"
-                        label: "Camera"
-                        statusText: root.camSystem && root.camSystem.isOn ? "On" : "Off"
                         active: root.camSystem ? root.camSystem.isOn : false
                         onClicked: if (root.camSystem) root.camSystem.toggle()
                     }
 
-                    ToggleTile {
-                        width: (parent.width - 8) / 2
+                    IconTile {
+                        width: (parent.width - 24) / 4
                         height: parent.height
                         glyph: "\uf130"
-                        label: "Mic"
-                        statusText: root.micSystem && root.micSystem.isMuted ? "Muted" : "On"
                         active: root.micSystem ? !root.micSystem.isMuted : false
                         onClicked: if (root.micSystem) root.micSystem.toggle()
+                    }
+
+                    IconTile {
+                        width: (parent.width - 24) / 4
+                        height: parent.height
+                        glyph: "\ue3ce"
+                        active: root.isDark
+                        onClicked: root.toggleTheme()
+                    }
+
+                    IconTile {
+                        width: (parent.width - 24) / 4
+                        height: parent.height
+                        glyph: "\uf186"
+                        active: root.nightLightEnabled
+                        onClicked: root.toggleNightLight()
                     }
                 }
             }
 
-            
             Row {
                 width: parent.width * 0.32 - 10
                 height: parent.height
                 spacing: 8
 
-                
                 VerticalBar {
                     width: (parent.width - 8) / 2
                     height: parent.height
@@ -236,7 +302,6 @@ Item {
                     }
                 }
 
-                
                 VerticalBar {
                     width: (parent.width - 8) / 2
                     height: parent.height
@@ -256,7 +321,6 @@ Item {
             }
         }
 
-        
         MediaControlCard {
             id: mediaCard
             active: root.active
@@ -265,7 +329,6 @@ Item {
         }
     }
 
-    
     component ToggleTile: Rectangle {
         id: tile
         property string glyph: ""
@@ -283,7 +346,10 @@ Item {
 
         Row {
             anchors.fill: parent
-            anchors.margins: 8
+            anchors.leftMargin: 8
+            anchors.rightMargin: 8
+            anchors.topMargin: 8
+            anchors.bottomMargin: 8
             spacing: 8
 
             Text {
@@ -341,7 +407,39 @@ Item {
         Behavior on color { ColorAnimation { duration: 140 } }
     }
 
-    
+    component IconTile: Rectangle {
+        id: itile
+        property string glyph: ""
+        property bool active: false
+
+        signal clicked()
+
+        radius: Radius.tile
+        color: active ? Colors.tileActiveBg : Colors.tileBg
+        border.color: active ? Colors.tileActiveBorder : Colors.tileBorder
+        border.width: 1
+
+        Text {
+            anchors.centerIn: parent
+            text: itile.glyph
+            color: itile.active ? Colors.blue : Colors.textSecondary
+            font.family: "JetBrainsMono Nerd Font"
+            font.pixelSize: 15
+            renderType: Text.NativeRendering
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+            onEntered: if (!itile.active) itile.border.color = Colors.hover
+            onExited: if (!itile.active) itile.border.color = Colors.tileBorder
+            onClicked: itile.clicked()
+        }
+
+        Behavior on color { ColorAnimation { duration: 140 } }
+    }
+
     component VerticalBar: Item {
         id: vbar
         property string glyph: ""

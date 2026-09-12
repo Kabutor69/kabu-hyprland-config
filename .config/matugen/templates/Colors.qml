@@ -2,10 +2,10 @@ import QtQuick
 pragma Singleton
 
 QtObject {
-    readonly property color islandBg: "#000000"   
-    readonly property color islandBorder: "#00000000"
-    readonly property color islandBorderMuted: "#00000000"
-    readonly property color bg: "#000000"
+    readonly property color islandBg: "{{colors.surface_container_lowest.default.hex}}"   
+    readonly property color islandBorder: "{{colors.outline_variant.default.hex}}"
+    readonly property color islandBorderMuted: "{{colors.outline.default.hex}}"
+    readonly property color bg: "{{colors.surface.default.hex}}"
     
     // Dynamic Material You Surfaces & Containers
     readonly property color surface: "{{colors.surface_container_lowest.default.hex}}"

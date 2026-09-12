@@ -30,6 +30,7 @@ This rice is made for Arch Linux / Arch-based systems. Install the main packages
 sudo pacman -S --needed \
   hyprland \
   hypridle \
+  hyprsunset \
   hyprlock \
   kitty \
   zsh \
@@ -77,6 +78,7 @@ The config expects these tools to exist:
 
 - `hyprland`
 - `hypridle`
+- `hyprsunset`
 - `hyprlock`
 - `quickshell`
 - `kitty`
@@ -250,12 +252,33 @@ This setup uses Matugen and color theme generation. The config references genera
 - `~/.config/qt6ct/colors/colors.conf`
 - `~/.config/kitty/colors.conf`
 - `~/.config/btop/themes/colors.theme`
+- `~/.config/nvim/lua/matugen.lua`
 
 If these files do not exist after copying, generate or re-run Matugen to create them.
 
 ---
 
-## 9) Start Hyprland
+## 9) Configure the night light
+
+This setup uses `hyprsunset` for the blue-light filter. Its scheduled profiles are defined in:
+
+```text
+~/.config/hypr/hyprsunset.conf
+```
+
+The profiles are:
+
+- `07:30`: normal colors
+- `18:00`: `4500K` with gamma `0.9`
+- `21:00`: `3500K` with gamma `0.8`
+
+After starting Quickshell, use the **Night Light** tile in the Control Center to turn the filter on or off. The tile only controls the running state; adjust the temperatures or schedule in `hyprsunset.conf`.
+
+If you change the configuration while `hyprsunset` is running, toggle Night Light off and on again to restart it with the updated settings.
+
+---
+
+## 10) Start Hyprland
 
 After everything is copied, reboot or log out and log in to Hyprland.
 
@@ -279,13 +302,14 @@ journalctl -b -u sddm
 
 ---
 
-## 10) Useful notes about this rice
+## 11) Useful notes about this rice
 
 This setup is using:
 
 - `hyprland.lua` as the main config entrypoint
 - `quickshell` for the bar and widgets
 - `hypridle` and `hyprlock` for idle and lock behavior
+- `hyprsunset` for scheduled night-light profiles
 - `kitty` as the terminal
 - `matugen` + `awww` for theme and wallpaper generation
 - `fastfetch` for the terminal welcome screen
@@ -303,12 +327,12 @@ The main config files are in:
 
 ---
 
-## 11) Quick install summary
+## 12) Quick install summary
 
 If you want the shortest working setup flow, this is the order:
 
 ```bash
-sudo pacman -S --needed hyprland hypridle hyprlock kitty zsh starship qt5ct qt6ct fzf fastfetch btop cava dolphin grim slurp wl-clipboard brightnessctl playerctl cliphist matugen awww neovim git networkmanager pipewire wireplumber pavucontrol xdg-desktop-portal-hyprland
+sudo pacman -S --needed hyprland hypridle hyprsunset hyprlock kitty zsh starship qt5ct qt6ct fzf fastfetch btop cava dolphin grim slurp wl-clipboard brightnessctl playerctl cliphist matugen awww neovim git networkmanager pipewire wireplumber pavucontrol xdg-desktop-portal-hyprland
 paru -S quickshell librewolf codium vesktop bibata-cursor-theme zsh-autosuggestions zsh-syntax-highlighting
 cp -a ./.config/. ~/.config/
 cp -a ./.local/. ~/.local/
@@ -322,7 +346,7 @@ Then reboot or log into Hyprland.
 
 ---
 
-## 12) Troubleshooting
+## 13) Troubleshooting
 
 If something does not launch:
 
@@ -333,6 +357,7 @@ which kitty
 which starship
 which awww
 which matugen
+which hyprsunset
 ```
 
 If a command is missing, install it before starting Hyprland.
@@ -347,6 +372,13 @@ If the theme is not applying, regenerate the config files and reload:
 
 ```bash
 hyprctl reload
+```
+
+If Night Light is not working, check that `hyprsunset` is installed and that the configuration was copied:
+
+```bash
+which hyprsunset
+ls ~/.config/hypr/hyprsunset.conf
 ```
 
 ---

@@ -5,7 +5,7 @@ QtObject {
     
     readonly property real normal: 26
     readonly property real drawer: 420
-    readonly property real wallpaper: 330
+    readonly property real wallpaper: 290
     readonly property real clipboard: 460
     readonly property real notification: 40
     readonly property real charging: 34

@@ -5,6 +5,10 @@ version = "4.2.0"
 input_path = "~/.config/matugen/templates/colors.lua"
 output_path = "~/.config/hypr/colors/colors.lua"
 
+[templates.neovim]
+input_path = "~/.config/matugen/templates/neovim.lua"
+output_path = "~/.config/nvim/lua/matugen.lua"
+
 [templates.kitty]
 input_path = "~/.config/matugen/templates/kitty.conf"
 output_path = "~/.config/kitty/colors.conf"

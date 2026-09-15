@@ -16,9 +16,26 @@ This README explains what to install, how to copy the config, and what commands 
 
 ## Preview
 
-Check out the rice in action:
+Each preview image shows the light and dark themes together, split diagonally:
 
-<video src="./Preview/preview.mp4" controls width="100%"></video>
+<table>
+  <tr>
+    <td><img src="./Preview/defult_bar.png" alt="Default bar in light and dark mode" width="100%"></td>
+    <td><img src="./Preview/app_drawer.png" alt="Application drawer in light and dark mode" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./Preview/control_center.png" alt="Control center in light and dark mode" width="100%"></td>
+    <td><img src="./Preview/notification.png" alt="Notifications in light and dark mode" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./Preview/clipboard.png" alt="Clipboard in light and dark mode" width="100%"></td>
+    <td><img src="./Preview/power.png" alt="Power menu in light and dark mode" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="./Preview/system_monitor.png" alt="System monitor in light and dark mode" width="100%"></td>
+    <td><img src="./Preview/tray.png" alt="System tray in light and dark mode" width="100%"></td>
+  </tr>
+</table>
 
 ---
 
